@@ -9,7 +9,7 @@ const Services = () => {
       .then((data) => setServices(data));
   }, []);
   return (
-    <div id="expert">
+    <div id="expert" className="container">
       <div className="row ">
         <h1 className="services-title"> Our Services:{services.length}</h1>
         <div className="service-container">

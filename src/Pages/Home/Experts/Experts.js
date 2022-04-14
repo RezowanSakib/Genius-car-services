@@ -17,8 +17,7 @@ const experts = [
 ];
 const Experts = () => {
   return (
-    <div id="expert">
-      {" "}
+    <div id="expert" className="container">
       <div className="row">
         <h2>Our experts:{experts.length}</h2>
         {experts.map((expert) => (

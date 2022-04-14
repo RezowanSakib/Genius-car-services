@@ -1,8 +1,12 @@
 import React, { useRef } from "react";
 import { Button, Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Login = () => {
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
   const emailRef = useRef("");
   const passRef = useRef("");
   const navigate = useNavigate();
@@ -10,11 +14,14 @@ const Login = () => {
     event.preventDefault();
     const email = emailRef.current.value;
     const password = passRef.current.value;
-    console.log(email, password);
+    signInWithEmailAndPassword(email, password);
   };
   const navigateRegister = (event) => {
     navigate("/register");
   };
+  if (user) {
+    navigate("/");
+  }
   return (
     <div className="row ">
       <div className="col-4 mx-auto">
@@ -47,7 +54,14 @@ const Login = () => {
           </Button>
         </Form>
         <p>
-          New to Genius Car?<span className="text-danger" onClick={navigateRegister}>Register</span>
+          New to Genius Car?
+          <Link
+            to="/register"
+            className="text-danger text-decoration-none"
+            onClick={navigateRegister}
+          >
+            Register
+          </Link>
         </p>
       </div>
     </div>
